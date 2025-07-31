@@ -31,5 +31,8 @@
     "eslint": "^8.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.83.0"
   }
 }
