@@ -1,4 +1,9 @@
 export { default as FeatureFlag } from './FeatureFlag';
-export { FeatureFlagProvider } from './FeatureFlagProvider';
+export { FeatureFlagProvider, useFeatureFlagContext } from './FeatureFlagProvider';
 export { useFeatureFlag } from './hooks/useFeatureFlag';
-export type { FeatureFlagConfig, FeatureFlagContextValue } from './types';
+export type {
+  FlagResponse,
+  FeatureFlagContextType,
+  FeatureFlagProviderProps,
+  UseFeatureFlagResult,
+} from './types';

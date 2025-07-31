@@ -1,8 +1,23 @@
-export interface FeatureFlagConfig {
-  [key: string]: boolean;
+import { ReactNode } from 'react';
+
+export interface FlagResponse {
+  [flagName: string]: boolean;
 }
 
-export interface FeatureFlagContextValue {
-  flags: FeatureFlagConfig;
-  isEnabled: (flagName: string) => boolean;
+export interface FeatureFlagContextType {
+  userId: string;
+  apiUrl: string;
+}
+
+export interface FeatureFlagProviderProps {
+  children: ReactNode;
+  userId: string;
+  apiUrl?: string;
+}
+
+export interface UseFeatureFlagResult {
+  isEnabled: boolean;
+  isLoading: boolean;
+  isError: boolean;
+  error: Error | null;
 }
