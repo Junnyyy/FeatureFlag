@@ -10,11 +10,13 @@ import type { FlagResponse } from '../types';
  * @returns Promise resolving to flag response object
  */
 const fetchFlags = async (apiUrl: string, userId: string): Promise<FlagResponse> => {
-  const response = await fetch(apiUrl, {
+  const url = new URL(apiUrl, window.location.origin);
+  url.searchParams.set('userId', userId);
+  
+  const response = await fetch(url.toString(), {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'User-ID': userId,
     },
   });
 
