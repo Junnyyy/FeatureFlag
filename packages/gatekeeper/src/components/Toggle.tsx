@@ -57,11 +57,7 @@ export const Toggle: React.FC<ToggleProps> = React.memo(({
   onError 
 }) => {
   const flagArray = useMemo(() => [flag], [flag]);
-  const { flags, isLoading } = useFeatureFlags({ flags: flagArray });
-
-  if (isLoading) {
-    return null;
-  }
+  const { flags } = useFeatureFlags({ flags: flagArray });
 
   if (flags[flag]) {
     return (
