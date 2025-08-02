@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 import { FeatureFlagProvider } from "@feature-flag/gatekeeper";
 
 interface UserContextType {
@@ -12,16 +12,16 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 interface ProvidersProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function Providers({ children }: ProvidersProps) {
   const [userId, setUserId] = useState("user-123");
-  
+
   const toggleUser = () => {
-    setUserId(prev => prev === "user-123" ? "user-122" : "user-123");
+    setUserId((prev) => (prev === "user-123" ? "user-122" : "user-123"));
   };
-  
+
   const hasFlag = userId === "user-122";
 
   return (
@@ -36,7 +36,7 @@ export function Providers({ children }: ProvidersProps) {
 export function useUser() {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error('useUser must be used within Providers');
+    throw new Error("useUser must be used within Providers");
   }
   return context;
 }
