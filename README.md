@@ -2,6 +2,8 @@
 
 A comprehensive demonstration of a self-built feature flag system showcasing both the library implementation and a real-world application example.
 
+https://github.com/user-attachments/assets/430176b5-0739-4646-8d88-3709ef3b6f8a
+
 ## What is this?
 
 This project demonstrates a complete feature flag solution with:
