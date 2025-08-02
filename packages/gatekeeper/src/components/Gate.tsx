@@ -83,9 +83,9 @@ export interface GateProps {
  */
 export const Gate: React.FC<GateProps> = React.memo(({ flag, children, onError }) => {
   const flagArray = useMemo(() => [flag], [flag]);
-  const { flags, isLoading } = useFeatureFlags({ flags: flagArray });
+  const { flags } = useFeatureFlags({ flags: flagArray });
 
-  if (isLoading || !flags[flag]) {
+  if (!flags[flag]) {
     return null;
   }
 

@@ -1,6 +1,5 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import {
   Table,
   TableBody,
@@ -41,31 +40,10 @@ const tableData = [
 ]
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false)
-  const { flags, isLoading, isError } = useFeatureFlags({
+  const { flags, isError } = useFeatureFlags({
     flags: ['showExtendedColumns']
   });
   const { toggleUser, hasFlag } = useUser();
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <p className="text-sm text-gray-600">Loading...</p>
-      </div>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <p className="text-sm text-gray-600">Loading...</p>
-      </div>
-    );
-  }
 
   if (isError) {
     return (

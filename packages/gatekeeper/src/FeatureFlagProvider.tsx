@@ -1,5 +1,7 @@
 import React, { createContext, useContext } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient } from '@tanstack/react-query';
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
+import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
 import type { FeatureFlagProviderProps, FeatureFlagContextType } from './types';
 
 const FeatureFlagContext = createContext<FeatureFlagContextType | undefined>(undefined);
@@ -8,9 +10,15 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 5 * 60 * 1000,
-      gcTime: 10 * 60 * 1000,
+      gcTime: 1000 * 60 * 60 * 24,
     },
   },
+});
+
+const asyncStoragePersister = createAsyncStoragePersister({
+  storage: typeof window !== 'undefined' ? window.localStorage : undefined,
+  key: 'FEATURE_FLAGS_CACHE',
+  throttleTime: 1000,
 });
 
 export const FeatureFlagProvider: React.FC<FeatureFlagProviderProps> = ({
@@ -24,11 +32,14 @@ export const FeatureFlagProvider: React.FC<FeatureFlagProviderProps> = ({
   };
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <PersistQueryClientProvider 
+      client={queryClient}
+      persistOptions={{ persister: asyncStoragePersister }}
+    >
       <FeatureFlagContext.Provider value={contextValue}>
         {children}
       </FeatureFlagContext.Provider>
-    </QueryClientProvider>
+    </PersistQueryClientProvider>
   );
 };
 

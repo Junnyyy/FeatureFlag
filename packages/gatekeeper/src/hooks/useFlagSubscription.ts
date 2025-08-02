@@ -47,6 +47,7 @@ export const useFlagSubscription = (subscribedFlags: string[]) => {
     isLoading,
     isError,
     error,
+    isPending,
   } = useQuery({
     queryKey: ['flags', userId],
     queryFn: () => fetchFlags(apiUrl, userId),
@@ -84,7 +85,7 @@ export const useFlagSubscription = (subscribedFlags: string[]) => {
 
   return {
     flags: relevantFlags,
-    isLoading,
+    isLoading: isPending && !allFlags,
     isError,
     error,
   };
