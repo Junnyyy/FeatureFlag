@@ -11,6 +11,7 @@
   "dependencies": {
     "@feature-flag/gatekeeper": "workspace:*",
     "@radix-ui/react-hover-card": "^1.1.14",
+    "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-switch": "^1.2.5",
     "@tanstack/react-query": "^5.83.0",
     "class-variance-authority": "^0.7.1",
