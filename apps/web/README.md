@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Feature Flag Demo App
+
+Interactive Next.js application showcasing the @feature-flag/gatekeeper library in action.
+
+## Features
+
+- Interactive table with animated column show/hide based on feature flags
+- User switching to demonstrate different flag states
+- Real-time API integration with smooth UX transitions
 
 ## Getting Started
 
-First, run the development server:
+From the project root:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the demo.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How It Works
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The demo shows a stock data table where the "Market Cap" and "Volume" columns are controlled by the `showExtendedColumns` feature flag:
 
-## Learn More
+- **User 123**: Flag is OFF (columns hidden)
+- **User 122**: Flag is ON (columns visible)
 
-To learn more about Next.js, take a look at the following resources:
+Toggle between users with the switch to see flags update in real-time.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Architecture
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### API Endpoint
 
-## Deploy on Vercel
+- `GET /api/flags?userId=user-123` returns feature flag values
+- User-based logic: even user IDs enable flags, odd user IDs disable them
+- 60-second cache headers for performance
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Components
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Uses `useFeatureFlags` hook from @feature-flag/gatekeeper
+- `Toggle` component for conditional table captions
+- Smooth CSS transitions for flag state changes
+
+### Tech Stack
+
+- Next.js 15 with App Router and Turbopack
+- React 19 with latest features
+- @feature-flag/gatekeeper for flag management
+- Tailwind CSS for styling
+- Radix UI for accessible components
