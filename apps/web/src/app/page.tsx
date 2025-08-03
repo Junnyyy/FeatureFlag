@@ -10,8 +10,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Switch } from "@/components/ui/switch";
-import { useFeatureFlags } from "@feature-flag/gatekeeper";
+import { useFeatureFlags, Gate, Toggle } from "@feature-flag/gatekeeper";
 import { useUser } from "@/components/providers";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const tableData = [
   {
@@ -87,6 +94,14 @@ export default function Home() {
 
         <div className="bg-white rounded-lg overflow-hidden">
           <Table>
+            <Toggle
+              flag="showExtendedColumns"
+              fallback={
+                <TableCaption>Basic stock information overview</TableCaption>
+              }
+            >
+              <TableCaption>Expanded stock information overview</TableCaption>
+            </Toggle>
             <TableHeader>
               <TableRow className="border-gray-200">
                 <TableHead className="text-sm font-medium text-gray-900 transition-all duration-300">
@@ -158,6 +173,36 @@ export default function Home() {
               ))}
             </TableBody>
           </Table>
+        </div>
+
+        <div className="mt-18 flex justify-center transition-all duration-300">
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button variant="link">@johnnyle</Button>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-80">
+              <div className="flex justify-between gap-4">
+                <div className="space-y-1">
+                  <h4 className="text-sm font-semibold">@johnnyle</h4>
+                  <p className="text-sm">
+                    Software engineer @JPMorganChase. Working on React,
+                    Electron, and Developer Tooling.
+                  </p>
+                  <div className="text-muted-foreground text-xs">
+                    Houston, TX -{" "}
+                    <Link
+                      href="https://johnnyle.io"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:underline"
+                    >
+                      johnnyle.io
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
         </div>
       </div>
     </div>
